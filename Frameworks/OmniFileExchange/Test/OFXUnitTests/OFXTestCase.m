@@ -76,7 +76,7 @@ RCS_ID("$Id$")
         name = [name stringByAppendingFormat:@"-%@", suffix];
     
     NSString *accountsDirectoryPath = [[self baseTemporaryDirectory] stringByAppendingPathComponent:name];
-    NSURL *accountsDirectoryURL = [NSURL fileURLWithPath:accountsDirectoryPath];
+    NSURL *accountsDirectoryURL = [NSURL fileURLWithPath:accountsDirectoryPath isDirectory:YES];
     
     // Clean up cruft from previous runs
     __autoreleasing NSError *error;

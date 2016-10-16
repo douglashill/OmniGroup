@@ -285,7 +285,7 @@ static NSURL *urlIfExists(NSURL *url)
     NSURL *plistURL = nil;
     if (_optionalPlistDirectoryURL != nil) {
         for (NSString *name in possibleNames) {
-            plistURL = urlIfExists([[_optionalPlistDirectoryURL URLByAppendingPathComponent:name] URLByAppendingPathExtension:OAAppearancePlistExtension].filePathURL);
+            plistURL = urlIfExists([[_optionalPlistDirectoryURL URLByAppendingPathComponent:name isDirectory:NO] URLByAppendingPathExtension:OAAppearancePlistExtension].filePathURL);
             if (plistURL != nil) {
                 return plistURL;
             }

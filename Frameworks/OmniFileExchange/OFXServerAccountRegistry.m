@@ -52,7 +52,7 @@ static NSString * const ValidImportExportAccounts = @"validImportExportAccounts"
                 return;
             }
             
-            accountsDirectoryURL = [NSURL fileURLWithPath:path];
+            accountsDirectoryURL = [NSURL fileURLWithPath:path isDirectory:YES];
         } else {
             __autoreleasing NSError *error = nil;
             NSURL *applicationSupportDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];

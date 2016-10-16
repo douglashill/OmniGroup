@@ -38,7 +38,7 @@ static OFPreference *OFXFileItemSkipTransfersWithErrorsInTimeInterval;
 static NSURL *_createContainerSubdirectory(NSURL *localContainerDirectory, NSString *name, NSError **outError) NS_RETURNS_RETAINED;
 static NSURL *_createContainerSubdirectory(NSURL *localContainerDirectory, NSString *name, NSError **outError)
 {
-    NSURL *url = [[[localContainerDirectory URLByAppendingPathComponent:name] absoluteURL] copy];
+    NSURL *url = [[[localContainerDirectory URLByAppendingPathComponent:name isDirectory:YES] absoluteURL] copy];
     
     __autoreleasing NSError *error = nil;
     if (![[NSFileManager defaultManager] createDirectoryAtURL:url withIntermediateDirectories:NO attributes:nil error:&error]) {

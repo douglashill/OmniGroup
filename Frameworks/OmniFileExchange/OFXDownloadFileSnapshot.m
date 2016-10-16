@@ -93,13 +93,13 @@ RCS_ID("$Id$")
     
     // No kOFXVersion_ContentsKey key since the item isn't downloaded.
         
-    if (!OFWriteNSPropertyListToURL(versionDictionary, [temporaryLocalSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName], outError)) {
+    if (!OFWriteNSPropertyListToURL(versionDictionary, [temporaryLocalSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName isDirectory:NO], outError)) {
         [[NSFileManager defaultManager] removeItemAtURL:temporaryLocalSnapshotURL error:NULL];
         OBChainError(outError);
         return NO;
     }
     
-    if (!OFWriteNSPropertyListToURL(infoDictionary, [temporaryLocalSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName], outError)) {
+    if (!OFWriteNSPropertyListToURL(infoDictionary, [temporaryLocalSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName isDirectory:NO], outError)) {
         [[NSFileManager defaultManager] removeItemAtURL:temporaryLocalSnapshotURL error:NULL];
         OBChainError(outError);
         return NO;

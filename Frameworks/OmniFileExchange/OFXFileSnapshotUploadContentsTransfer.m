@@ -67,7 +67,7 @@ RCS_ID("$Id$")
 
     // Collect async write operations        
     BOOL success = [_uploadingSnapshot iterateFiles:&error withApplier:^BOOL(NSURL *fileURL, NSString *hash, NSError **applierError){
-        NSURL *remoteFileURL = [temporaryRemoteSnapshotURL URLByAppendingPathComponent:hash];
+        NSURL *remoteFileURL = [temporaryRemoteSnapshotURL URLByAppendingPathComponent:hash isDirectory:NO];
         
         DEBUG_TRANSFER(2, @"  Writing %@ -> %@", fileURL, remoteFileURL);
         
@@ -95,7 +95,7 @@ RCS_ID("$Id$")
         if (!infoData)
             OFXFileSnapshotTransferReturnWithError(error);
         
-        NSURL *infoURL = [temporaryRemoteSnapshotURL URLByAppendingPathComponent:kOFXRemoteInfoFilename];
+        NSURL *infoURL = [temporaryRemoteSnapshotURL URLByAppendingPathComponent:kOFXRemoteInfoFilename isDirectory:NO];
         
         _totalBytesToWrite += [infoData length];
 

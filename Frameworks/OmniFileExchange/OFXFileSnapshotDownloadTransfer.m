@@ -99,7 +99,7 @@ RCS_ID("$Id$")
         if (![_downloadingSnapshot makeDownloadStructureAt:_localTemporaryDocumentContentsURL didCreateDirectoryOrLink:&_hasCreatedLocalTemporaryDocumentContentsURL error:&error withFileApplier:^(NSURL *fileURL, long long fileSize, NSString *hash){
             // TODO: Avoid redownloading data we've already downloaded. This is not terribly likely, but we could have a document with the same image attached multiple times.
 
-            NSURL *remoteFileURL = [_remoteSnapshotURL URLByAppendingPathComponent:hash];
+            NSURL *remoteFileURL = [_remoteSnapshotURL URLByAppendingPathComponent:hash isDirectory:NO];
             
             DEBUG_TRANSFER(2, @"  Reading %@ -> %@", remoteFileURL, fileURL);
             

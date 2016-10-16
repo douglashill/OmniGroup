@@ -265,7 +265,7 @@ static NSDictionary *_recordVersionContents(NSURL *localDocumentURL, NSFileCoord
     
     _localSnapshotURL = [localSnapshotURL copy];
 
-    NSURL *infoURL = [localSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName];
+    NSURL *infoURL = [localSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName isDirectory:NO];
     _infoDictionary = OFReadNSPropertyListFromURL(infoURL, outError);
     if (!_infoDictionary) {
         OFXError(outError, OFXAccountUnableToReadFileItem, @"Error loading Info.plist", nil);
@@ -277,7 +277,7 @@ static NSDictionary *_recordVersionContents(NSURL *localDocumentURL, NSFileCoord
         return nil;
     }
     
-    _versionDictionary = [OFReadNSPropertyListFromURL([localSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName], outError) copy];
+    _versionDictionary = [OFReadNSPropertyListFromURL([localSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName isDirectory:NO], outError) copy];
     if (!_versionDictionary) {
         OFXError(outError, OFXAccountUnableToReadFileItem, @"Error loading Version.plist", nil);
         return nil;
@@ -728,7 +728,7 @@ static BOOL RunningOnAccountQueue(void)
     }
     
     __autoreleasing NSError *error;
-    if (!OFWriteNSPropertyListToURL(infoDictionary, [_localSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName], &error)) {
+    if (!OFWriteNSPropertyListToURL(infoDictionary, [_localSnapshotURL URLByAppendingPathComponent:kOFXLocalInfoFileName isDirectory:NO], &error)) {
         NSLog(@"Unable to archive info dictionary for new snapshot at %@:\ninfoDictionary=%@\nerror=%@", _localSnapshotURL, infoDictionary, [error toPropertyList]);
         if (outError)
             *outError = error;
@@ -755,7 +755,7 @@ static BOOL RunningOnAccountQueue(void)
     }
     
     __autoreleasing NSError *error;
-    if (!OFWriteNSPropertyListToURL(versionDictionary, [_localSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName], &error)) {
+    if (!OFWriteNSPropertyListToURL(versionDictionary, [_localSnapshotURL URLByAppendingPathComponent:kOFXVersionFileName isDirectory:NO], &error)) {
         NSLog(@"Unable to archive version dictionary for snapshot at %@:\nversionDictionary=%@\nerror=%@", _localSnapshotURL, versionDictionary, [error toPropertyList]);
         if (outError)
             *outError = error;

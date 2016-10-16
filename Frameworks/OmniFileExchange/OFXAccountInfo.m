@@ -71,7 +71,7 @@ static OFVersionNumber *MinimumCompatibleAccountVersionNumber;
     NSURL *accountInfoCacheURL = [localAccountDirectoryURL URLByAppendingPathComponent:@"InfoCache.plist"];
     _propertyListCache = [[OFXPropertyListCache alloc] initWithCacheFileURL:accountInfoCacheURL remoteTemporaryDirectoryURL:temporaryDirectoryURL remoteBaseDirectoryURL:remoteAccountURL];
     
-    NSURL *localStateURL = [localAccountDirectoryURL URLByAppendingPathComponent:LocalStatePropertyListName];
+    NSURL *localStateURL = [localAccountDirectoryURL URLByAppendingPathComponent:LocalStatePropertyListName isDirectory:NO];
     _localStatePropertyList = [[OFXPersistentPropertyList alloc] initWithFileURL:localStateURL];
     
     _remoteAccountURL = [remoteAccountURL copy];
@@ -119,7 +119,7 @@ static NSTimeInterval _fileInfoAge(ODAVFileInfo *fileInfo, NSDate *serverDateNow
     }
 
     // _remoteAccountURL is our cannonical URL, but we might be redirected
-    NSURL *infoURL = [connection suggestRedirectedURLForURL:[_remoteAccountURL URLByAppendingPathComponent:OFXInfoFileName]];
+    NSURL *infoURL = [connection suggestRedirectedURLForURL:[_remoteAccountURL URLByAppendingPathComponent:OFXInfoFileName isDirectory:NO]];
     
     if (!infoDictionary) {
         // There doesn't seem to be a remote file -- create it.
