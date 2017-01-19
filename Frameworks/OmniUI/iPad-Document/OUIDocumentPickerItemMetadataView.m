@@ -152,15 +152,28 @@ RCS_ID("$Id$");
     self.trailingHorizPadding.constant = -[self bottomPaddingAmount];
 
     [constraints addObjectsFromArray:@[self.leadingHorizPadding, self.trailingHorizPadding]];
-    
-    self.transferProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-    self.transferProgressView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self.transferProgressView];
-    [constraints addObject:[self.transferProgressView.widthAnchor constraintEqualToAnchor:self.widthAnchor]];
-    [constraints addObject:[self.transferProgressView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
-    [constraints addObject:[self.transferProgressView.centerYAnchor constraintEqualToAnchor:self.topAnchor]];
-    
+
     [NSLayoutConstraint activateConstraints:constraints];
+}
+
+@synthesize transferProgressView = _transferProgressView;
+
+- (UIProgressView *)transferProgressView {
+    if (_transferProgressView) return _transferProgressView;
+
+    NSMutableArray *constraints = [NSMutableArray array];
+
+    _transferProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    _transferProgressView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_transferProgressView];
+    [constraints addObject:[_transferProgressView.widthAnchor constraintEqualToAnchor:self.widthAnchor]];
+    [constraints addObject:[_transferProgressView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
+    [constraints addObject:[_transferProgressView.centerYAnchor constraintEqualToAnchor:self.topAnchor]];
+
+    [NSLayoutConstraint activateConstraints:constraints];
+
+    return _transferProgressView;
+
 }
 
 - (NSString *)name;

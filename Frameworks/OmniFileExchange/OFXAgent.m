@@ -526,7 +526,7 @@ static void _stopObservingAccountAgent(OFXAgent *self, OFXAccountAgent *accountA
     // Only automatically download "small" items.
     unsigned long long fileSize = metadataItem.fileSize;
     
-    NSUInteger maximumAutomaticDownloadSize = [[OFPreference preferenceForKey:@"OFXMaximumAutomaticDownloadSize"] unsignedIntegerValue];
+    NSUInteger maximumAutomaticDownloadSize = 50;//[[OFPreference preferenceForKey:@"OFXMaximumAutomaticDownloadSize"] unsignedIntegerValue];
     
     return (fileSize <= (unsigned long long)maximumAutomaticDownloadSize);
 }

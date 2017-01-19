@@ -251,7 +251,16 @@ BOOL OFURLContainsURL(NSURL *containerURL, NSURL *url)
         // -[NSFileManager contentsOfDirectoryAtURL:...], when given something in file://localhost/var/mobile/... will return file URLs with non-standarized paths like file://localhost/private/var/mobile/...  Terrible.
         OBASSERT([containerURL isFileURL]);
         containerPath = OFStandardizedPathForFileURL(containerURL, NO);
-        urlPath = OFStandardizedPathForFileURL(url, YES);
+
+
+        // that attempt to ‘use caching’ was completely ineffective
+        NSString *lastComponent = [url lastPathComponent];
+        NSURL *parent = [url URLByDeletingLastPathComponent];
+
+        // try passing NO instead and see if that still works. The YES is the reason this is slow and the one above is fast: nothing to do with caching.
+        // Would still be better to resolve the parent of all the file items before doing this.
+
+        urlPath = [OFStandardizedPathForFileURL(parent, YES) stringByAppendingPathComponent:lastComponent];
     } else {
         containerPath = [[containerURL absoluteURL] path];
         urlPath = [[url absoluteURL] path];

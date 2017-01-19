@@ -254,8 +254,15 @@ tryAgain:
     __block BOOL needsDownload = NO;
     
     NSMutableArray *staleFileInfoVersions = [[NSMutableArray alloc] init];
-    
+
+//    __block NSUInteger idx = 1;
+//    NSUInteger const count = fileInfos.count;
+
     [self _enumerateDocumentFileInfos:fileInfos collectStaleFileInfoVersions:staleFileInfoVersions applier:^(NSString *fileIdentifier, NSUInteger fileVersion, ODAVFileInfo *fileInfo){
+
+//        NSLog(@"File info %lu / %lu", (unsigned long)idx, (unsigned long)count);
+//        ++idx;
+
         OFXFileItem *fileItem = [_documentIndex fileItemWithIdentifier:fileIdentifier];
         if (fileItem) {
             if (fileItem.version == fileVersion) {

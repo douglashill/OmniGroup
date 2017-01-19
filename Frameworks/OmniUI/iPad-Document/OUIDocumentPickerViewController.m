@@ -2295,7 +2295,7 @@ static UIImage *ImageForScope(ODSScope *scope) {
         
         // Delete Item
         
-        [leftItems addObject:_exportBarButtonItem];
+//        [leftItems addObject:_exportBarButtonItem];
         if (!self.selectedScope.isExternal)
             [leftItems addObject:_moveBarButtonItem];
         if (!self.selectedScope.isTrash && self.selectedScope.canRenameDocuments) {

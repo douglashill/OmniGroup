@@ -347,6 +347,7 @@ static void _updateFlagFromAttributes(ODSFileItem *fileItem, NSString *bindingKe
     
     if (!wasDownloaded && fileItem.isDownloaded) {
         [_fileItemsToAutomaticallyDownload removeObject:fileItem];
+        NSLog(@"%lu files to download (finished %@)", (unsigned long)_fileItemsToAutomaticallyDownload.count, fileItem.fileURL.lastPathComponent.stringByDeletingPathExtension);
         fileItem.hasDownloadQueued = NO;
         [self _requestDownloadOfFileItem];
         
@@ -565,10 +566,12 @@ static void _updateFlagFromAttributes(ODSFileItem *fileItem, NSString *bindingKe
     OBPRECONDITION([NSThread isMainThread]); // _fileItems and _fileItemsToAutomaticallyDownload are main-thread only
     
     NSSet *fileItems = self.fileItems;
-    
+
     // Get rid of any since-invalidated items.
     [_fileItemsToAutomaticallyDownload intersectSet:fileItems];
-    
+
+//    NSLog(@"%lu files to download automatically", (unsigned long)_fileItemsToAutomaticallyDownload.count);
+
     // Bail if any file item is already downloading or we've asked it to start (metadata query update that it is may be pending). Manual download requests will still proceed.
     if ([fileItems any:^BOOL(ODSFileItem *fileItem) { return fileItem.isDownloading || fileItem.downloadRequested; }])
         return;

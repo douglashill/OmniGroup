@@ -27,7 +27,7 @@
 @property(nonatomic,retain) IBOutlet OUIDocumentNameTextField *nameTextField;
 @property(nonatomic,retain) IBOutlet UILabel *dateLabel;
 @property(nonatomic,readonly) UIImageView *nameBadgeImageView;
-@property(nonatomic, retain) IBOutlet UIProgressView *transferProgressView;
+@property(nonatomic, retain, readonly) IBOutlet UIProgressView *transferProgressView;
 @property (nonatomic, retain) IBOutlet UIView *topHairlineView;
 @property(nonatomic, retain) UIView *startSnap; // for animating to/from large size when renaming
 @property(nonatomic, retain) UIView *endSnap; // for animating to/from large size when renaming

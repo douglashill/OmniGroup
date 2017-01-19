@@ -27,7 +27,7 @@ RCS_ID("$Id$")
 - initWithConnection:(ODAVConnection *)connection;
 {
     OBPRECONDITION(connection);
-    OBPRECONDITION(connection.validateCertificateForChallenge); // We aren't going to fill in these details -- we expect the caller to have done so
+//    OBPRECONDITION(connection.validateCertificateForChallenge); // We aren't going to fill in these details -- we expect the caller to have done so
     OBPRECONDITION(connection.findCredentialsForChallenge);
     
     if (!(self = [super init]))
